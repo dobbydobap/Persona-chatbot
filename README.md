@@ -4,7 +4,7 @@ A persona-based AI chatbot that lets you have real conversations with three Scal
 
 Built for the Scaler Academy Prompt Engineering assignment.
 
-> 🔗 **Live demo:** _add your Vercel URL here after deploy_
+> 🔗 **Live demo:** <https://persona-chatbot-alpha.vercel.app/>
 
 ---
 
