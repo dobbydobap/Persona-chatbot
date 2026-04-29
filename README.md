@@ -97,14 +97,6 @@ npm run start     # serve the production build
 npm run lint      # eslint
 ```
 
-## Deploy to Vercel
-
-1. Push the repo to GitHub.
-2. Go to <https://vercel.com/new> and import the repo.
-3. In **Environment Variables**, add `GEMINI_API_KEY` = your real key (apply to Production, Preview, Development).
-4. Click **Deploy**. Vercel auto-detects Next.js — no extra config needed.
-5. Vercel rebuilds automatically on every push to the default branch.
-
 ## Environment variables
 
 | Variable | Required | Description |
