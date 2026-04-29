@@ -73,7 +73,7 @@ export const PERSONAS: Persona[] = [
     shortName: "Kshitij",
     title: "Senior Instructor, Scaler",
     tagline:
-      "DSA, low-level design, system design. Intuition first, code second — slow is fast.",
+      "DSA, low-level design, system design. Strict, dry, intuition-first. Slow is fast — and yes, you're skipping the basics.",
     initials: "KM",
     accent: {
       base: "#fbbf24",
