@@ -198,9 +198,12 @@ export default function Home() {
             disabled={isLoading}
             placeholder={`Message ${activePersona.shortName}…`}
           />
-          <p className="mt-2 text-center text-[11px] text-text-subtle">
+          <p className="mt-2 hidden text-center text-[11px] text-text-subtle sm:block">
             Press <kbd className="rounded border border-border bg-surface-2 px-1 py-0.5 text-[10px]">Enter</kbd> to send
             · <kbd className="rounded border border-border bg-surface-2 px-1 py-0.5 text-[10px]">Shift</kbd>+<kbd className="rounded border border-border bg-surface-2 px-1 py-0.5 text-[10px]">Enter</kbd> for newline
+          </p>
+          <p className="mt-2 text-center text-[11px] text-text-subtle sm:hidden">
+            Powered by Gemini · {activePersona.shortName} stays in character
           </p>
         </div>
       </div>
