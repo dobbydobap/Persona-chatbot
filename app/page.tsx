@@ -4,6 +4,9 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ChatInput } from "@/components/ChatInput";
 import { ChatWindow } from "@/components/ChatWindow";
 import type { Message } from "@/components/MessageBubble";
+import { PersonaSwitcher } from "@/components/PersonaSwitcher";
+import { PersonaHero } from "@/components/PersonaHero";
+import { SuggestionChips } from "@/components/SuggestionChips";
 import {
   DEFAULT_PERSONA_ID,
   getPersona,
@@ -43,6 +46,7 @@ export default function Home() {
   }, [activePersona]);
 
   const messages = messagesByPersona[activePersonaId] ?? [];
+  const isEmpty = messages.length === 0 && !isLoading;
 
   const sendMessage = useCallback(
     async (text: string) => {
@@ -134,37 +138,46 @@ export default function Home() {
     void sendMessage(lastUserMessageRef.current);
   }, [activePersonaId, sendMessage]);
 
+  const handlePersonaChange = useCallback((id: PersonaId) => {
+    setActivePersonaId(id);
+    // Spec: switching personas resets the conversation for that persona.
+    setMessagesByPersona((prev) => ({ ...prev, [id]: [] }));
+    setDraft("");
+  }, []);
+
   return (
     <div className="flex min-h-[100dvh] flex-col">
       <header className="sticky top-0 z-20 border-b border-border bg-bg/70 backdrop-blur">
-        <div className="mx-auto flex w-full max-w-[760px] items-center justify-between px-4 py-3">
-          <div className="flex items-center gap-2">
+        <div className="mx-auto flex w-full max-w-[760px] items-center justify-between gap-3 px-4 py-3">
+          <div className="flex items-center gap-2 shrink-0">
             <span
               aria-hidden
-              className="size-2 rounded-full"
+              className="size-2 rounded-full transition-colors"
               style={{ background: "var(--accent)" }}
             />
-            <span className="font-display text-[15px] font-semibold tracking-tight">
+            <span className="hidden font-display text-[15px] font-semibold tracking-tight sm:inline">
               Scaler Persona Chat
             </span>
+            <span className="font-display text-[15px] font-semibold tracking-tight sm:hidden">
+              Persona Chat
+            </span>
           </div>
-          <span className="text-xs text-text-muted">
-            Talking with {activePersona.shortName}
-          </span>
+          <PersonaSwitcher
+            activeId={activePersonaId}
+            onChange={handlePersonaChange}
+          />
         </div>
       </header>
 
-      <main className="mx-auto flex w-full max-w-[760px] flex-1 flex-col px-4 pb-32 pt-6">
-        {messages.length === 0 && !isLoading ? (
-          <div className="rounded-2xl border border-border bg-surface/50 p-6 text-text-muted">
-            <p className="font-display text-lg text-text">
-              {activePersona.name}
-            </p>
-            <p className="mt-1 text-sm">{activePersona.tagline}</p>
-            <p className="mt-4 text-xs text-text-subtle">
-              Switcher and suggestion chips arrive in the next commit. For now,
-              just type a question below.
-            </p>
+      <main className="mx-auto flex w-full max-w-[760px] flex-1 flex-col px-4 pb-36 pt-6 sm:pt-8">
+        {isEmpty ? (
+          <div className="space-y-6">
+            <PersonaHero persona={activePersona} />
+            <SuggestionChips
+              persona={activePersona}
+              onPick={(text) => sendMessage(text)}
+              disabled={isLoading}
+            />
           </div>
         ) : (
           <ChatWindow
@@ -186,23 +199,11 @@ export default function Home() {
             placeholder={`Message ${activePersona.shortName}…`}
           />
           <p className="mt-2 text-center text-[11px] text-text-subtle">
-            Press Enter to send · Shift + Enter for newline
+            Press <kbd className="rounded border border-border bg-surface-2 px-1 py-0.5 text-[10px]">Enter</kbd> to send
+            · <kbd className="rounded border border-border bg-surface-2 px-1 py-0.5 text-[10px]">Shift</kbd>+<kbd className="rounded border border-border bg-surface-2 px-1 py-0.5 text-[10px]">Enter</kbd> for newline
           </p>
         </div>
       </div>
-
-      {/* Temporary persona toggle — replaced by the real switcher in the next commit. */}
-      <button
-        onClick={() => {
-          const idx = PERSONAS.findIndex((p) => p.id === activePersonaId);
-          const next = PERSONAS[(idx + 1) % PERSONAS.length];
-          setActivePersonaId(next.id);
-          setMessagesByPersona((prev) => ({ ...prev, [next.id]: [] }));
-        }}
-        className="fixed right-4 top-16 z-20 rounded-full border border-border bg-surface px-3 py-1.5 text-xs text-text-muted transition hover:text-text"
-      >
-        Switch persona →
-      </button>
     </div>
   );
 }
