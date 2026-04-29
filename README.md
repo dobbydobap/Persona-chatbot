@@ -7,7 +7,7 @@
 [![Live](https://img.shields.io/badge/Live-persona--chatbot--alpha.vercel.app-10b981?style=for-the-badge)](https://persona-chatbot-alpha.vercel.app/)
 [![Next.js](https://img.shields.io/badge/Next.js-16-000000?style=for-the-badge&logo=nextdotjs)](https://nextjs.org)
 [![Tailwind](https://img.shields.io/badge/Tailwind-v4-38bdf8?style=for-the-badge&logo=tailwindcss)](https://tailwindcss.com)
-[![Gemini](https://img.shields.io/badge/Gemini-2.5%20Flash-8B5CF6?style=for-the-badge&logo=googlegemini)](https://ai.google.dev)
+[![Gemini](https://img.shields.io/badge/Gemini-2.5%20Flash%20Lite-8B5CF6?style=for-the-badge&logo=googlegemini)](https://ai.google.dev)
 
 [**Live demo →**](https://persona-chatbot-alpha.vercel.app/)
 
@@ -37,7 +37,7 @@ The hard part of this project is **prompt engineering**, not the chat UI. The fu
 | Framework | Next.js 16 (App Router) + React 19 |
 | Styling | Tailwind CSS v4 with CSS-variable theme tokens |
 | Motion | Framer Motion (switcher, hero, message bubble entries) |
-| LLM | Google Gemini 2.5 Flash via `@google/generative-ai` |
+| LLM | Google Gemini 2.5 Flash Lite via `@google/generative-ai` |
 | Icons / fonts | Lucide; Inter + Sora via `next/font` |
 | Hosting | Vercel |
 
@@ -102,7 +102,7 @@ npm run lint      # eslint
 | Variable | Required | Description |
 | --- | --- | --- |
 | `GEMINI_API_KEY` | yes | Google AI Studio API key. Used server-side only — never exposed to the browser. |
-| `GEMINI_MODEL` | no | Override the default model. Defaults to `gemini-2.5-flash`. |
+| `GEMINI_MODEL` | no | Override the default model. Defaults to `gemini-2.5-flash-lite`. |
 
 The `.env.local` file is gitignored. The `.env.example` is committed as a template. **Never commit a real key.** If you accidentally do, rotate the key in AI Studio immediately.
 
