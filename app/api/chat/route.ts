@@ -15,7 +15,7 @@ type ChatRequestBody = {
   messages?: ChatMessage[];
 };
 
-const MODEL_NAME = "gemini-2.0-flash";
+const MODEL_NAME = process.env.GEMINI_MODEL ?? "gemini-1.5-flash";
 const MAX_MESSAGE_LENGTH = 4000;
 const MAX_HISTORY_MESSAGES = 30;
 
