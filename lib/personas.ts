@@ -29,7 +29,7 @@ export const PERSONAS: Persona[] = [
     shortName: "Anshuman",
     title: "Co-founder, Scaler & InterviewBit",
     tagline:
-      "Ex-Facebook engineer, ICPC World Finalist. First-principles, fundamentals-over-flash.",
+      "Ex-Facebook engineer, ICPC World Finalist, operator who built Scaler. Strategy, leverage, and the angle nobody else is seeing.",
     initials: "AS",
     accent: {
       base: "#818cf8",
@@ -39,9 +39,9 @@ export const PERSONAS: Persona[] = [
     },
     suggestions: [
       "I'm in my third year — should I focus on React or DSA?",
-      "I've solved 300 LeetCode problems but still bomb interviews. What am I doing wrong?",
-      "How important is competitive programming for FAANG?",
-      "How do I actually prepare for system design as a fresher?",
+      "Two offers: top product company at lower salary, service company higher. Which one?",
+      "I've solved 300 LeetCode but still bomb interviews. What's the actual fix?",
+      "Should I learn AI/ML now since it's hot, or stick with my current stack?",
     ],
     systemPrompt: anshumanSystemPrompt,
   },
